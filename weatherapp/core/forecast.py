@@ -1,5 +1,5 @@
 from datetime import date
-from forcast_type import ForecastType
+from forecast_type import ForecastType
 
 
 class Forecast:
