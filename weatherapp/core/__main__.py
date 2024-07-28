@@ -4,6 +4,7 @@ import argparse
 from weatherapp.core import parser_loader
 from weatherapp.core import ForecastType
 from weatherapp.core.unit import Unit
+from weatherapp.core import SetUnitAction
 
 
 def _validate_forecast_args(args):
@@ -34,6 +35,7 @@ unit_values = [name.title() for name, value in
 argparser.add_argument('-u', '--unit',
                        choices=unit_values,
                        required=False,
+                       action=SetUnitAction,
                        dest='unit',
                        help='Specify the unit that will be used to display the temperatures')
 
