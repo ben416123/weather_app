@@ -1,5 +1,6 @@
 import sys
 import argparse
+import os
 
 from weatherapp.core import parser_loader
 from weatherapp.core import ForecastType
@@ -16,9 +17,12 @@ def _validate_forecast_args(args):
         sys.exit()
 
 
-parsers = parser_loader.load('./weatherterm/parsers')
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parsers_dir = os.path.join(current_dir, '../parsers')
+
+parsers = parser_loader.load(parsers_dir)
 argparser = argparse.ArgumentParser(
-    prog='weatherterm',
+    prog='weatherapp',
     description='Weather info from weather.com on your terminal')
 
 required = argparser.add_argument_group('required arguments')
