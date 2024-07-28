@@ -30,3 +30,37 @@ required.add_argument('-p', '--parser',
 
 unit_values = [name.title() for name, value in
                Unit.__members__.items()]
+
+argparser.add_argument('-u', '--unit',
+                       choices=unit_values,
+                       required=False,
+                       dest='unit',
+                       help='Specify the unit that will be used to display the temperatures')
+
+required.add_argument('-a', '--areacode',
+                      required=True,
+                      dest='area_code',
+                      help='The code area to get the weather broadcast from. They can be retrieved from weather.com')
+
+argparser.add_argument('-v', '--version',
+                       action='version',
+                       version='%(prog)s 1.0')
+
+argparser.add_argument('-td', '--today',
+                       dest='forecast_option',
+                       action='store_const',
+                       const=ForecastType.TODAY,
+                       help='Show the weather forecast for the current day')
+
+args = argparser.parse_args()
+
+_validate_forecast_args(args)
+
+cls = parsers[args.parser]
+
+parser = cls()
+
+results = parser.run(args)
+
+for result in results:
+    print(results)
